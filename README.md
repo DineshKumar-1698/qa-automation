@@ -24,7 +24,7 @@ This portfolio highlights my expertise in test automation for ERP systems, parti
 
 ## View Live Site
 
-You can view the live portfolio at: [https://dineshkumar-1698.github.io](https://dineshkumar-1698.github.io)
+You can view the live portfolio at: [https://dineshkumar-1698.github.io/qa-automation/](https://dineshkumar-1698.github.io/qa-automation/)
 
 ## Projects Highlighted
 
