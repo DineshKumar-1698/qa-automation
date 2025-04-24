@@ -1,4 +1,26 @@
-/* Global Styles */
+/*---------------------------------------
+ * TABLE OF CONTENTS:
+ * 1. Global Styles & Resets
+ * 2. Typography
+ * 3. Layout & Containers
+ * 4. Navigation
+ * 5. Home Section
+ * 6. About Section
+ * 7. Skills Section
+ * 8. Experience Section
+ * 9. Projects Section
+ * 10. Stats Section
+ * 11. Education Section
+ * 12. Contact Section
+ * 13. Footer
+ * 14. Animations & Effects
+ * 15. Utility Classes
+ * 16. Media Queries
+ *---------------------------------------*/
+
+/*---------------------------------------
+ * 1. Global Styles & Resets
+ *---------------------------------------*/
 * {
     margin: 0;
     padding: 0;
@@ -12,18 +34,15 @@ body {
     background-color: #f8f9fa;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
 section {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
+/*---------------------------------------
+ * 2. Typography
+ *---------------------------------------*/
 h1, h2, h3, h4 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
@@ -41,29 +60,41 @@ ul li {
     margin-bottom: 8px;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/*---------------------------------------
+ * 3. Layout & Containers
+ *---------------------------------------*/
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
-.animate-text {
-    animation: fadeIn 0.8s ease forwards;
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 35px;
+    font-size: 2.2rem;
+    color: #1a3a5e;
 }
 
-.animate-text-delay {
-    opacity: 0;
-    animation: fadeIn 0.8s ease forwards;
-    animation-delay: 0.3s;
+.section-title:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60px;
+    height: 4px;
+    background-color: #4a6bdf;
 }
 
-.animate-text-delay-more {
-    opacity: 0;
-    animation: fadeIn 0.8s ease forwards;
-    animation-delay: 0.6s;
+/* Fix for gradient text in browsers that don't support it */
+.section-title.gradient-text {
+    color: #1a3a5e; /* Fallback color if gradient doesn't work */
 }
 
-/* Navigation Styles */
+/*---------------------------------------
+ * 4. Navigation
+ *---------------------------------------*/
 nav {
     background-color: #1a3a5e;
     color: #fff;
@@ -130,13 +161,66 @@ nav .container {
     width: 100%;
 }
 
-/* Home Section */
+/* Mobile Navigation Toggle */
+.nav-toggle {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+.nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/*---------------------------------------
+ * 5. Home Section
+ *---------------------------------------*/
 #home {
     height: 100vh;
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
     padding-top: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add animated background elements */
+#home:before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(74, 107, 223, 0.05);
+    border-radius: 50%;
+    top: -50px;
+    left: -50px;
+    animation: float-slow 15s infinite ease-in-out;
+}
+
+#home:after {
+    content: "";
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(74, 107, 223, 0.03);
+    border-radius: 50%;
+    bottom: -100px;
+    right: -100px;
+    animation: float-slow 18s infinite ease-in-out reverse;
+}
+
+@keyframes float-slow {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(30px, 30px) rotate(5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 .home-container {
@@ -144,6 +228,7 @@ nav .container {
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 100%;
 }
 
 .profile-content {
@@ -151,67 +236,152 @@ nav .container {
     flex-direction: row;
     align-items: center;
     gap: 60px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    max-width: 1000px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    max-width: 1200px;
+    width: 85%;
+    position: relative;
+    z-index: 5;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.profile-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image {
+    position: relative;
+}
+
+.profile-image:before {
+    content: "";
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    border-radius: 50%;
+    top: -5%;
+    left: -5%;
+    animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .profile-image img {
-    width: 250px;
-    height: 250px;
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     border: 5px solid #fff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .profile-image img:hover {
     transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.profile-text {
+    flex: 1;
 }
 
 .profile-text h1 {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
     margin-bottom: 10px;
     color: #1a3a5e;
+    line-height: 1.1;
 }
 
 .profile-text h2 {
-    font-size: 1.8rem;
-    margin-bottom: 5px;
+    font-size: 2rem;
+    margin-bottom: 8px;
     color: #4a6bdf;
     font-weight: 500;
 }
 
 .profile-text p {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #555;
     margin-bottom: 25px;
+    line-height: 1.5;
 }
 
-/* About Section */
+#home .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Add responsive adjustments */
+@media (max-width: 991.98px) {
+    .profile-content {
+        padding: 40px;
+        gap: 40px;
+        width: 90%;
+    }
+
+    .profile-image img {
+        width: 240px;
+        height: 240px;
+    }
+
+    .profile-text h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .profile-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 35px;
+        gap: 30px;
+    }
+
+    .profile-image:before {
+        width: 105%;
+        height: 105%;
+        top: -2.5%;
+        left: -2.5%;
+    }
+}
+
+/*---------------------------------------
+ * 6. About Section
+ *---------------------------------------*/
 #about {
     background-color: #fff;
+    padding-top: 60px;
+    padding-bottom: 40px; /* Reduced from 60px */
+}
+
+#about p {
+    margin-bottom: 5px;
+    line-height: 1.6;
 }
 
 .about-qualities {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
-    margin-top: 40px;
+    gap: 25px;
+    margin-top: 20px; /* Reduced from 25px */
+    margin-bottom: 0; /* Explicitly set to remove any bottom margin */
 }
 
 .quality {
     background-color: #f8f9fa;
-    padding: 25px;
+    padding: 25px 20px; /* Adjusted padding */
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     flex: 1;
+    margin-bottom: 0; /* Explicitly remove bottom margin */
 }
 
 .quality:hover {
@@ -222,80 +392,29 @@ nav .container {
 .quality i {
     font-size: 2.5rem;
     color: #4a6bdf;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .quality h3 {
     font-size: 1.4rem;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #1a3a5e;
 }
 
 .quality p {
     color: #555;
     font-size: 1rem;
+    margin-bottom: 0; /* Remove bottom margin from paragraphs in qualities */
 }
 
-/* Button Styles */
-.cta-buttons {
-    margin-top: 30px;
-    display: flex;
-    gap: 15px;
+/* Adjust the spacing between sections */
+#about + #skills {
+    padding-top: 50px; /* Reduced padding between sections */
 }
 
-.btn {
-    padding: 12px 25px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-}
-
-.primary-btn {
-    background-color: #4a6bdf;
-    color: white;
-}
-
-.primary-btn:hover {
-    background-color: #3a56b5;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(74, 107, 223, 0.4);
-}
-
-.secondary-btn {
-    background-color: transparent;
-    color: #4a6bdf;
-    border: 2px solid #4a6bdf;
-}
-
-.secondary-btn:hover {
-    background-color: #4a6bdf;
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(74, 107, 223, 0.4);
-}
-
-/* Section Titles */
-.section-title {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 50px;
-    font-size: 2.2rem;
-    color: #1a3a5e;
-}
-
-.section-title:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    width: 60px;
-    height: 4px;
-    background-color: #4a6bdf;
-}
-
-/* Skills Section */
+/*---------------------------------------
+ * 7. Skills Section
+ *---------------------------------------*/
 #skills {
     background-color: #f8f9fa;
 }
@@ -314,7 +433,8 @@ nav .container {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform;
 }
 
 .skill-category:hover {
@@ -368,14 +488,19 @@ nav .container {
     text-align: right;
 }
 
-/* Experience Section */
+/*---------------------------------------
+ * 8. Experience Section
+ *---------------------------------------*/
 #experience {
     background-color: #fff;
 }
 
+/* Fix for experience timeline visibility */
 .experience-timeline {
     position: relative;
     padding-left: 40px;
+    opacity: 1 !important; /* Force opacity to be 1 */
+    transform: translateY(0) !important; /* Force transform to initial position */
 }
 
 .experience-timeline:before {
@@ -391,6 +516,8 @@ nav .container {
 .experience-item {
     position: relative;
     margin-bottom: 50px;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 .experience-item:before {
@@ -428,7 +555,9 @@ nav .container {
     color: #555;
 }
 
-/* Projects Section */
+/*---------------------------------------
+ * 9. Projects Section
+ *---------------------------------------*/
 #projects {
     background-color: #f8f9fa;
 }
@@ -459,6 +588,7 @@ nav .container {
     width: 100%;
     height: 220px;
     object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
 .project-content {
@@ -537,7 +667,56 @@ nav .container {
     background-color: #d6e4ff;
 }
 
-/* Education Section */
+/* Enhanced Project Card Hover */
+.project-card.active {
+    transform: scale(1.03) translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.project-card.active .project-image img {
+    transform: scale(1.05);
+}
+
+/*---------------------------------------
+ * 10. Stats Section
+ *---------------------------------------*/
+#stats {
+    background-color: #1a3a5e;
+    color: white;
+    text-align: center;
+    padding: 80px 0;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    padding: 20px;
+    margin: 20px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.stat-item h3 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.stat-item p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/*---------------------------------------
+ * 11. Education Section
+ *---------------------------------------*/
 #education {
     background-color: #fff;
 }
@@ -596,7 +775,9 @@ nav .container {
     top: -5px;
 }
 
-/* Contact Section */
+/*---------------------------------------
+ * 12. Contact Section
+ *---------------------------------------*/
 #contact {
     background-color: #f8f9fa;
 }
@@ -696,7 +877,9 @@ textarea.form-control {
     box-shadow: 0 5px 15px rgba(74, 107, 223, 0.4);
 }
 
-/* Footer */
+/*---------------------------------------
+ * 13. Footer
+ *---------------------------------------*/
 footer {
     background-color: #1a3a5e;
     color: #fff;
@@ -708,29 +891,202 @@ footer p {
     margin-bottom: 0;
 }
 
-/* Mobile Navigation */
-.nav-toggle {
-    display: none;
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 15px;
+/*---------------------------------------
+ * 14. Animations & Effects
+ *---------------------------------------*/
+/* Basic Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.nav-toggle span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
+.animate-text {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.animate-text-delay {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+    animation-delay: 0.3s;
+}
+
+.animate-text-delay-more {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+    animation-delay: 0.6s;
+}
+
+/* Scroll Animation */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animate-on-scroll.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Button Effects */
+.btn {
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
     transition: all 0.3s ease;
+    font-size: 1rem;
 }
 
-/* Media Queries for Responsiveness */
-@media (max-width: 992px) {
+.primary-btn {
+    background-color: #4a6bdf;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.primary-btn:hover {
+    background-color: #3a56b5;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(74, 107, 223, 0.4);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: #4a6bdf;
+    border: 2px solid #4a6bdf;
+}
+
+.secondary-btn:hover {
+    background-color: #4a6bdf;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(74, 107, 223, 0.4);
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(74, 107, 223, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(74, 107, 223, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 107, 223, 0); }
+}
+
+/* Floating Animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.quality {
+    animation: float 6s ease-in-out infinite;
+}
+
+.quality:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.quality:nth-child(3) {
+    animation-delay: 2s;
+}
+
+/* Loading Line Animation */
+@keyframes lineGrow {
+    to { transform: scaleY(1); }
+}
+
+.experience-timeline:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #4a6bdf 0%, #4a6bdf 100%);
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: lineGrow 1.5s ease forwards 0.5s;
+}
+
+/* Typing Effect */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.typing-text::after {
+    content: '|';
+    animation: blink 1s infinite;
+}
+
+/* Gradient Animation */
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #4a6bdf, #82a9ff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 8s ease infinite;
+}
+
+/* Shine Effect */
+.shine-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine-effect::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.shine-effect:hover::after {
+    opacity: 1;
+    left: 100%;
+    top: 100%;
+    transition: 0.7s;
+}
+
+/* Particle Background */
+#particle-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+/*---------------------------------------
+ * 16. Media Queries
+ *---------------------------------------*/
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+    /* Add any specific styles for large screens */
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
     .profile-content {
-        padding: 30px;
-        gap: 40px;
+        padding: 20px;
+        gap: 20px;
     }
 
     .profile-image img {
@@ -759,7 +1115,8 @@ footer p {
     }
 }
 
-@media (max-width: 768px) {
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
     .nav-toggle {
         display: block;
     }
@@ -801,10 +1158,12 @@ footer p {
         transform: rotate(-45deg) translate(5px, -6px);
     }
 
+    /* Fix spacing in profile section */
     .profile-content {
         flex-direction: column;
         text-align: center;
         gap: 30px;
+        padding: 30px;
     }
 
     .section-title:after {
@@ -839,7 +1198,8 @@ footer p {
     }
 }
 
-@media (max-width: 576px) {
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
     section {
         padding: 60px 0;
     }
@@ -854,14 +1214,17 @@ footer p {
     }
 
     .profile-text h1 {
+        margin-bottom: 5px;
         font-size: 2rem;
     }
 
     .profile-text h2 {
+        margin-bottom: 3px;
         font-size: 1.4rem;
     }
 
     .profile-text p {
+        margin-bottom: 15px;
         font-size: 1rem;
     }
 
