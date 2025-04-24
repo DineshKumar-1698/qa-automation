@@ -14,6 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 top: targetSection.offsetTop - 70,
                 behavior: 'smooth'
             });
+
+            // Close mobile menu if open
+            const navLinks = document.querySelector('.nav-links');
+            const navToggle = document.querySelector('.nav-toggle');
+            if (navLinks.classList.contains('show')) {
+                navLinks.classList.remove('show');
+                navToggle.classList.remove('active');
+            }
         });
     });
 
@@ -82,5 +90,30 @@ document.addEventListener('DOMContentLoaded', function() {
         const navLinks = document.querySelector('.nav-links');
         navLinks.classList.toggle('show');
         this.classList.toggle('active');
+    });
+
+    // Add animation to project cards
+    const projectCards = document.querySelectorAll('.project-card');
+
+    projectCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        card.style.transitionDelay = `${index * 0.1}s`;
+
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 400);
+    });
+
+    // Add parallax effect to home section
+    const homeSection = document.getElementById('home');
+
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.pageYOffset;
+        if (homeSection) {
+            homeSection.style.backgroundPosition = `center ${scrollPosition * 0.5}px`;
+        }
     });
 });
